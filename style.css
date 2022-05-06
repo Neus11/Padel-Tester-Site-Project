@@ -1,0 +1,171 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+/*Nos aseguramos en todos sitios tenga el mismo color y fuente*/
+body {
+    background: #9A9A9A;
+    font-size: 120%;
+    font-family: Arial, Helvetica, sans-serif;
+
+}
+
+a {
+    text-decoration: none;
+}
+
+.prueba {
+  align-items: center;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.conteiner {
+    width: 90%;
+    margin: auto;
+}
+
+/* Navegacion */
+.nav-main {
+    font-size: 17px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+}
+
+.nav-logo {
+    width: 70px;
+}
+
+.nav-main ul {
+    display: flex;
+}
+
+.nav-main ul li a:hover {
+    border-bottom: 2px solid white;
+
+}
+
+.nav-main ul li {
+    padding: 20px;
+}
+
+.nav-main ul li a{
+    color: white;
+}
+
+/* Portada*/
+
+.portada {
+    width: 100%;
+    background: url('./img/palas_portada.jpg') no-repeat center center/cover;
+    height: 550px;
+    padding-bottom: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+
+}
+
+.portada-header {
+    background-color: #9A9A9A;
+    border-radius: 5px;
+    padding: 20px;
+    color: white;
+}
+
+.portada a {
+    color: black;
+    background-color: #9A9A9A;
+    margin-top: 10px;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+form, .contenido {
+  width: 30%;
+  margin: 0px auto;
+  padding: 20px;
+  border: 1px solid;
+  background: rgb(207, 204, 204);
+  border-radius: 0px 0px 10px 10px;
+  color: #0a0a0a;
+}
+
+form li + li {
+    margin-top: 1em;
+}
+
+label {
+    /* Los labels tienen la misma mida y forma */
+    display: inline-block;
+    width: 90px;
+    text-align: right;
+}
+
+input, textarea {
+	/* Nos aseguramos que tengan la misma mida los input y textarea */
+	font: 1em sans-serif;
+	width: 300px;
+	box-sizing: border-box; /* Para que sea mas igual los bordes */
+	border: 1px solid rgb(8, 8, 8);
+}
+
+.button {
+    /* Posicion de los botones */
+    padding-left: 90px;
+}
+
+.header, h2 {
+  width: 30%;
+  margin: 50px auto 0px;
+  color: white;
+  background: grey;
+  border: 1px solid black;
+  text-align: center;
+  border-bottom: none;
+  border-radius: 10px 10px 0px 0px;
+  padding: 20px;
+}
+
+.input-group {
+  margin: 10px 0px 10px 0px;
+}
+.input-group label {
+  display: block;
+  text-align: left;
+  margin: 3px;
+}
+.input-group input {
+  height: 30px;
+  width: 93%;
+  padding: 5px 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid gray;
+}
+.btn, button{
+  padding: 10px;
+  font-size: 15px;
+  background: #6D8299;
+  border: none;
+  border-radius: 5px;
+  margin-left: 0.5em;
+}
+/*Como mostramos los errors*/
+.error {
+  width: 80%;
+  margin: 0px auto;
+  padding: 10px;
+  border: 1px solid #a94442;
+  color: #a94442;
+  border-radius: 5px;
+  text-align: left;
+}
