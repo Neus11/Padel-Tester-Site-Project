@@ -15,6 +15,10 @@
             <input type="text" name="palaname" />
         </div>
         <div class="input-group">
+            <label>Nombre:</label>
+            <input type="text" name="name"></input>
+        </div>
+        <div class="input-group">
             <label>Comentario:</label>
             <textarea type="text" name="comment"></textarea>
             <!-- Area en donde se insertara el comentario -->

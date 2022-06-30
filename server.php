@@ -32,20 +32,22 @@
             array_push($errors, "Las contraseñas no coincide!");
         }
 
-
+        $query = "SELECT * FROM user WHERE usuario='$username' AND password ='$password'";
+        $result = mysqli_query($db, $query);
         //Sino hay errores se introducira la info a la tabla de usuario
-        if(count($errors) == 0) {
+        if(count($errors) == 0 && mysqli_num_rows($result) == 0) {
             $sql = "INSERT INTO user (email, password, usuario) VALUES ('$email', '$password', '$username')";
             mysqli_query($db, $sql);
-            $_SESSION['username'] = $username;
-            $_SESSION['succes'] = "You are now logged in";
-            header('location: index.php');
+            echo "<h2>Registrado!!</h2>";
+            //$_SESSION['username'] = $username;
+            //$_SESSION['succes'] = "You are now logged in";
+            //header('location: index.php');
+          }
 
-
-        } else {
-          array_push($errors, "No se ha podido insertar, ya existe");
-        }
+          if (mysqli_num_rows($result) == 1) {
+          array_push($errors, "No se ha podido insertar, ya existe! Porfavor haga SignIn!");
     }
+  }
 
     // Gestion del formulariologin y sus errores
     if (isset($_POST['login'])) {

@@ -2,7 +2,56 @@
 <html>
   <head>
     <title>Palas</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <style>
+       body {
+        background: #9A9A9A;
+        font-size: 120%;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+
+      div {
+        text-align: center;
+      }
+
+      a {
+        color: white; 
+      }
+
+      #palas {
+        margin: auto;
+        width: 50%;
+      }
+      #palas th, td {
+        width: 30%;
+        color: white;
+        background: grey;
+        border: 1px solid black;
+        text-align: center;
+        border-radius: 10px 10px 10px 10px;
+        padding: 20px;
+      }
+
+      h2 {      
+        width: 30%;
+        margin: 50px auto 0px;
+        color: white;
+        background: grey;
+        border: 1px solid black;
+        text-align: center;
+        border-bottom: none;
+        border-radius: 10px 10px 0px 0px;
+        padding: 20px;
+      }
+
+      form {
+        text-align: center;
+      }
+
+      label {
+        color:white;
+      }
+
+    </style>
   </head>
   <body>
       <br />
@@ -10,7 +59,7 @@
       <form action="pagina_busqueda.php" method="get">
         <label> Buscar: <input type="text" name="buscar"></label>
         <input type="submit" name="enviado" value="Busca!" />
-        <a href='portada.php' style= color:red;>Volver</a>
+        <a href='portada.php' style= color:white;>Volver</a>
         <!-- Añadimos link de vuelta a la pagina principal-->
       </form>
   </body>
@@ -19,30 +68,64 @@
 <?php
 include ('server.php');
 /* Inlcuimos la conexión a la base de datos y gestion de errores*/
+$tam_pag = 5;
 
-$sql = "SELECT * FROM pala";
-/*Seleccionamos todos los productos de la tabla*/
+if(isset($_GET["pagina"])){
 
-$result = mysqli_query($db, $sql);
-/*Guardamos el resultado de la query en un variables*/
+  if($_GET["pagina"]==1){
+
+    header("Location:palas.php");
+
+  } else {
+
+    $page = $_GET["pagina"];
+
+  }
+
+} else {
+
+  $page = 1;
+
+}
+
+$beginning = ($page-1)*$tam_pag;
+
+$sql_tot = "SELECT * FROM pala";
+
+$result = mysqli_query($db, $sql_tot);
+$row = mysqli_fetch_array($result);
+$num_row = count($row);
+
+$tot_pag = ceil($num_row/$tam_pag);
+
+$sql_limit = "SELECT * FROM pala LIMIT $beginning, $tam_pag";
+$result = mysqli_query($db, $sql_limit);
 
 while($row=mysqli_fetch_assoc($result)) {
   /* Recorremos los resultados y guardamos el resultado row para usar luego su valor
   para crear una table con HTML para mostras el resultado determinado, nos fererimos a ellos
   con el nombre del campo gracias a la funcion fecth_assoc*/
 
-  echo '<table width="100%" align="center"><th> NOMBRE DE LA PALA: </th><td>' . $row["nombre"] . '</td>';
+  echo '<table id="palas"><th> NOMBRE DE LA PALA: </th><td>' . $row["nombre"] . '</td>';
   echo '<th> PRECIO: </th><td>' . $row["precio"] . '€ </td>';
-  echo '<img src = "data:image/jpeg; base64,' . base64_encode($row["photo"]) . '" width = "200px" height = "200px"/>' ;
+  
   /*Cogemos el contenido del campo photo en tipo BLOB y lo descodificamos para su correcta muestra*/
   echo '<th> COLOR: </th><td>' . $row["palaCol"] . '</td>';
   echo '<th> PESO: </th><td>' . $row["precio"] . 'g </td>';
   echo '<th> MARCA: </th><td>' . $row["idMarca"] . '</td>';
-  echo '</table><br />';
-  echo '<h3>DESCRIPCIÓN: </h3>' . $row["descripcion"];
-  echo "<p><a href='portada.php' style= color:red;>Volver</a></p><br /><br />";
-  /*Link de vuelta a la portada*/
+  echo '<td><img src = "data:image/jpeg; base64,' . base64_encode($row["photo"]) . '" width = "200px" height = "200px"/></td>' ;
+  echo '<tr><th>DESCRIPCIÓN: </th><td colspan="10">' . $row["descripcion"] . '</td></tr>';
+  echo "<tr><td><a href='portada.php' style= color:white;>Volver</a></td></tr><br />";
+  echo '</table><br /><div>';
+}
+
+// Paginación
+
+for ($i=1; $i<=$tot_pag; $i++) {
+
+  echo "<a href='?pagina=" . $i . "'>" . $i . " </a>";
 
 }
 
+echo "</div>";
 ?>
